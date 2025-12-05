@@ -177,4 +177,4 @@ export const TaskModal = ({ open, onClose, onSave, task, currentWeek }) => {
       </DialogContent>
     </Dialog>
   );
-};}
+};
