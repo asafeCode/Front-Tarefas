@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { userAPI } from '../services/api.js';
 
-const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+const API_BASE = "https://api-pontuae.azurewebsites.net";
 
 const AuthContext = createContext(null);
 
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(`${API_BASE}/api/login`, {
+      const response = await axios.post(`${API_BASE}/login`, {
         email,
         password
       });
@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const response = await axios.post(`${API_BASE}/api/user`, {
+      const response = await axios.post(`${API_BASE}/user`, {
         name,
         email,
         password

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+const API_BASE = 'https://api-pontuae.azurewebsites.net';
 
 const api = axios.create({
-  baseURL: `${API_BASE}/api`,
+  baseURL: `${API_BASE}`,
 });
 
 // Interceptor para adicionar token
@@ -34,7 +34,7 @@ api.interceptors.response.use(
         //   "accessToken": "string",
         //   "refreshToken": "string"
         // }
-        const response = await axios.post(`${API_BASE}/api/token/refresh-token`, {
+        const response = await axios.post(`${API_BASE}/token/refresh-token`, {
           refreshToken,
         });
 
@@ -66,7 +66,7 @@ export const taskAPI = {
   // GET /api/tasks - Listar tarefas com filtros
   // Retorna 200 OK: Array de ResponseTaskJson
   // ResponseTaskJson: { title, description, weeklyGoal, progress, category, startDate, weekOfMonth, isCompleted }
-  getAll: (filters = {}) => api.get('/tasks', { params: filters }),
+  getAll: (filters = {}) => api.get('/api/tasks', { params: filters }),
   
   // GET /api/task/{id} - Obter tarefa específica
   // Retorna 200 OK: ResponseTaskJson
@@ -93,6 +93,11 @@ export const taskAPI = {
 
 // User APIs
 export const userAPI = {
+  // POST /api/user/register - Registrar usuário
+  // Body: { "name": "string", "email": "string", "password": "string" }
+  // Retorna 201 Created: { "name": "string", "email": "string" }
+  register: (data) => api.post('/user', data),
+
   // GET /api/user - Obter dados do usuário
   // Retorna 200 OK: { "name": "string", "tokens": { "accessToken": "string", "refreshToken": "string" } }
   getProfile: () => api.get('/user'),
