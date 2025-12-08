@@ -56,7 +56,7 @@ export const TaskModal = ({ open, onClose, onSave, task, currentWeek }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.title.trim()) {
       toast.error('O título é obrigatório');
       return;
